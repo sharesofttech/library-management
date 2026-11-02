@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.06) 0%, transparent 40%),
+                #0f172a;
+    color: #f8fafc;
+    min-height: 100vh;
+  }
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+/* Match table, sidebar and content scrollbars to the admin theme. */
+.admin-panel {
+  color-scheme: dark;
+}
+
+.admin-panel ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.admin-panel ::-webkit-scrollbar-track {
+  background: #0f172a;
+  border-radius: 999px;
+}
+
+.admin-panel ::-webkit-scrollbar-thumb {
+  background: #475569;
+  border: 2px solid #0f172a;
+  border-radius: 999px;
+}
+
+.admin-panel ::-webkit-scrollbar-thumb:hover {
+  background: #818cf8;
+}
+
+.admin-panel ::-webkit-scrollbar-thumb:active {
+  background: #6366f1;
+}
+
+.admin-panel ::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.admin-panel ::-webkit-scrollbar-corner {
+  background: #0f172a;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  .admin-panel * {
+    scrollbar-width: thin;
+    scrollbar-color: #475569 #0f172a;
+  }
+}
+
+@media (forced-colors: active) {
+  .admin-panel * {
+    scrollbar-color: auto;
+  }
+}
+
+.glass-card-subtle {
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.catalog-hero {
+  background: radial-gradient(ellipse at 80% 20%, rgba(129, 140, 248, 0.2), transparent 42%),
+    linear-gradient(125deg, #172554 0%, #1e1b4b 48%, #111827 100%);
+}
+
+.catalog-orbit {
+  position: absolute;
+  width: 15rem;
+  height: 15rem;
+  border: 1px solid rgba(199, 210, 254, 0.1);
+  border-radius: 9999px;
+  pointer-events: none;
+}
+
+.catalog-orbit-one {
+  right: 8%;
+  top: -9rem;
+}
+
+.catalog-orbit-two {
+  right: -2rem;
+  top: -6rem;
+  width: 21rem;
+  height: 21rem;
+  border-color: rgba(199, 210, 254, 0.06);
+}
+
+.catalog-book-card {
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.catalog-book-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(129, 140, 248, 0.45);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.28);
+}

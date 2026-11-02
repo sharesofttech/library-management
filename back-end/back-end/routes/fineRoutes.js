@@ -1,0 +1,27 @@
+const router = require("express").Router();
+const { verifyToken, requireRole } = require("../middleware/authMiddleware");
+const controller = require("../controllers/fineController");
+const staff = requireRole("admin", "librarian");
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 2 * 1024 * 1024 } });
+const importCsv = (req, res, next) => upload.single("file")(req, res, error => {
+  if (error) return res.status(400).json({ message: error.code === "LIMIT_FILE_SIZE" ? "CSV file must be 2 MB or smaller" : "Unable to read uploaded CSV file" });
+  next();
+});
+router.use(verifyToken);
+router.post("/fine-payments/import", staff, importCsv, controller.importPayments);
+router.get("/settings/fines", staff, controller.getSettings);
+router.patch("/settings/fines", requireRole("admin"), controller.saveSettings);
+router.get("/borrowings/:id/fines", staff, controller.validateId, controller.preview);
+router.patch("/borrowings/:id/fine-rate", requireRole("admin"), controller.validateId, controller.legacyRate);
+router.patch("/borrowings/:id/return", staff, controller.validateId, controller.returnBook);
+router.patch("/borrowings/:id/lost", staff, controller.validateId, controller.lostBook);
+router.get("/fines", staff, controller.listFines);
+router.get("/fines/:id/payments/export", staff, controller.validateId, controller.exportPayments);
+router.get("/fines/:id/payments", staff, controller.validateId, controller.listPayments);
+router.post("/fines/:id/payments", staff, controller.validateId, controller.recordPayment);
+router.get("/fine-payments/export", staff, controller.exportPayments);
+router.get("/fine-payments", staff, controller.listPayments);
+router.get("/my/fines", requireRole("user"), controller.myFines);
+router.get("/my/fine-payments", requireRole("user"), controller.myPayments);
+module.exports = router;

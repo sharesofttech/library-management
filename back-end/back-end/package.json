@@ -1,0 +1,27 @@
+{
+  "scripts": {
+    "test": "node --test --test-concurrency=1",
+    "migrate": "node migrate_fines.js",
+    "migrate:registration": "node migrate_registration_approval.js",
+    "migrate:renter-listings": "node migrate_renter_listings.js",
+    "migrate:renter-copies": "node migrate_renter_copies.js",
+    "migrate:rental-requests": "node migrate_rental_requests.js",
+    "migrate:role-applications": "node migrate_role_applications.js",
+    "migrate:registration-verification": "node migrate_registration_verification.js",
+    "migrate:fine-payment-import": "node migrate_fine_payment_import.js",
+    "migrate:overdue-reminders": "node migrate_overdue_reminders.js",
+    "migrate:delivery-rates": "node migrate_delivery_rates.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.5.0",
+    "mysql2": "^3.24.6",
+    "node-cron": "^4.6.0",
+    "nodemailer": "^10.2.1",
+    "sequelize": "^6.37.8"
+  }
+}

@@ -1,0 +1,10 @@
+import React from "react";
+import { Mail, Phone, ShieldCheck, UserRound } from "lucide-react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/authSlice";
+
+export default function MyProfile() {
+  const user = useSelector(selectUser) || {};
+  const roleLabel = user.role === "user" ? "Reader / Member" : user.role === "admin" ? "System Admin" : user.role === "librarian" ? "Librarian" : user.role || "Account";
+  return <section className="mx-auto max-w-3xl space-y-6"><header><p className="text-xs font-semibold uppercase tracking-[0.18em] text-indigo-300">Account</p><h1 className="mt-1 text-2xl font-bold text-white">My Profile</h1><p className="mt-1 text-sm text-slate-400">Your account information.</p></header><div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6"><div className="mb-6 flex items-center gap-4 border-b border-slate-800 pb-5"><span className="grid h-14 w-14 place-items-center rounded-2xl bg-indigo-600/20 text-indigo-300"><UserRound className="h-7 w-7" /></span><div><h2 className="text-lg font-semibold text-white">{user.name}</h2><p className="text-xs capitalize text-slate-400">{roleLabel}</p></div></div><dl className="grid gap-5 sm:grid-cols-2"><div><dt className="flex items-center gap-2 text-xs text-slate-500"><Mail className="h-3.5 w-3.5" />Email</dt><dd className="mt-1 text-sm text-slate-200">{user.email || "-"}</dd></div><div><dt className="flex items-center gap-2 text-xs text-slate-500"><Phone className="h-3.5 w-3.5" />Phone</dt><dd className="mt-1 text-sm text-slate-200">{user.countryCode} {user.phone || "-"}</dd></div><div><dt className="flex items-center gap-2 text-xs text-slate-500"><ShieldCheck className="h-3.5 w-3.5" />Account status</dt><dd className="mt-1 text-sm capitalize text-emerald-300">{user.approvalStatus || "Active"}</dd></div>{user.role === "user" && <div><dt className="flex items-center gap-2 text-xs text-slate-500"><ShieldCheck className="h-3.5 w-3.5" />Renter access</dt><dd className="mt-1 text-sm text-slate-200">{user.isRenter ? "Approved" : "Not enabled"}</dd></div>}</dl></div></section>;
+}
